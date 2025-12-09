@@ -1,6 +1,7 @@
 import pytest
 from src.products import Product
 
+
 @pytest.fixture
 def sample_product():
     """Фикстура для создания объекта продукта."""
