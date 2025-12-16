@@ -25,3 +25,11 @@ def test_product_types(sample_product):
     assert isinstance(sample_product.description, str)
     assert isinstance(sample_product.price, int)
     assert isinstance(sample_product.quantity, int)
+
+
+def test_price_is_not_zero_or_negative():
+    """Тест на отрицательную цену или равную нулю"""
+    with pytest.raises(ValueError):
+        Product("lg", "44d", 0, 1)
+    with pytest.raises(ValueError):
+        Product("nokia", "3310", -100, 1)

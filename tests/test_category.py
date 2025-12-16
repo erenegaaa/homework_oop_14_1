@@ -72,3 +72,28 @@ def test_add_product(empty_category, sample_product):
 
     assert empty_category.product_count == 1
     assert empty_category.products[0] == sample_product
+
+
+def test_add_product_to_category():
+    """Тест для проверки добавления продуктов в категорию"""
+    category = Category("Phones", "desc")
+    product = Product("iPhone", "desc", 100000, 5)
+
+    category.add_product(product)
+    assert len(category.products) == 1
+
+    assert category.products[0].price == 100000
+    assert category.products[0].quantity == 5
+
+
+def test_add_duplicate_product():
+    """Тест для проверки добавления дубликата"""
+    category = Category("Phones", "desc")
+    product1 = Product("Vivo", "128/6", 17000, 3)
+    product2 = Product("Vivo", "128/6", 19000, 3)
+
+    category.add_product(product1)
+    category.add_product(product2)
+    assert len(category.products) == 1
+    assert category.products[0].price == 19000
+    assert category.products[0].quantity == 6
