@@ -19,16 +19,20 @@ class Product:
 
 
     @classmethod
-    def new_product(cls, products, **product_data):
+    def new_product(cls, product_data):
         """Добавление нового товара с условием дублирования"""
-        new_product = cls(**product_data)
-        products.append(new_product)
-        return new_product
+        return cls(
+            name = product_data["name"],
+            description = product_data["description"],
+            price = product_data["price"],
+            quantity = product_data["quantity"]
+        )
 
 
     @price.setter
     def price(self, value):
         """Возвращаем цену если она не ровна нулю или не является отрицательной"""
         if value <= 0:
-            raise ValueError("""Цена не должна быть нулевая или отрицательная""")
+            print("""Цена не должна быть нулевая или отрицательная""")
+            return
         self.__price = value
