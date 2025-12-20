@@ -11,6 +11,10 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self):
+        """Возвращает имя товара, цену и количество в строковом формате"""
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.\n"
+
 
     @property
     def price(self):
@@ -36,3 +40,11 @@ class Product:
             print("""Цена не должна быть нулевая или отрицательная""")
             return
         self.__price = value
+
+
+    def __add__(self, other):
+        """
+        Метод позволяющий сложить цену и количество продуктов
+        Вид формулы: a * b + a * b
+        """
+        return self.price * self.quantity + other.price * other.quantity

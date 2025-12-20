@@ -98,3 +98,7 @@ def test_add_duplicate_product():
     assert products_str.count("\n") == 1
     assert "Vivo, 19000 руб." in products_str
     assert "Остаток: 6 шт." in products_str
+
+
+def test_category_str(sample_category):
+    assert str(sample_category) == "Телефоны, количество продуктов: 5 шт."
