@@ -100,5 +100,5 @@ def test_add_duplicate_product():
     assert "Остаток: 6 шт." in products_str
 
 
-def test_category_str(empty_category):
-    assert str(empty_category) == "Phones, количество продуктов: 0 шт."
+def test_category_str(sample_category):
+    assert str(sample_category) == "Телефоны, количество продуктов: 5 шт."

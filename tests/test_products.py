@@ -13,6 +13,17 @@ def sample_product():
     )
 
 
+@pytest.fixture
+def sample_product_2():
+    """Фикстура для создания объекта продукта."""
+    return Product(
+        name="iphone",
+        description="512/12",
+        price=399000,
+        quantity=3
+    )
+
+
 def test_product_attibutes(sample_product):
     assert sample_product.name == "Nokia 3310"
     assert sample_product.description == "Агрегат для всего"
@@ -38,3 +49,7 @@ def test_price_is_not_zero_or_negative(capsys):
 
 def test_str_product(sample_product):
     assert str(sample_product) == "Nokia 3310, 850 руб. Остаток: 3 шт.\n"
+
+
+def test_add_products(sample_product, sample_product_2):
+    assert sample_product + sample_product_2 == 1199550
