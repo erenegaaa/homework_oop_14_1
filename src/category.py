@@ -17,6 +17,12 @@ class Category:
             for product in products:
                 self.add_product(product)
 
+    def __str__(self):
+        total_quantity = 0
+        for product in self.__products:
+            total_quantity += product.quantity
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
+
     def add_product(self, product):
         """Добавление продукта в список, увеличивая счетчик с условием дублирования продуктов"""
         for existing_product in self.__products:
@@ -36,5 +42,5 @@ class Category:
         """Возвращение продуктов"""
         result = ""
         for product in self.__products:
-            result += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            result += str(product)
         return result

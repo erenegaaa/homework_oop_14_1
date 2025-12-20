@@ -35,3 +35,6 @@ def test_price_is_not_zero_or_negative(capsys):
 
     assert "Цена не должна быть нулевая или отрицательная" in captured.out
     assert product.price == 100
+
+def test_str_product(sample_product):
+    assert str(sample_product) == "Nokia 3310, 850 руб. Остаток: 3 шт.\n"
