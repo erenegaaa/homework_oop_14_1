@@ -1,9 +1,5 @@
 class Product:
     """Класс продуктов."""
-    name: str
-    description: str
-    price: float
-    quantity: int
 
     def __init__(self, name, description, price, quantity):
         self.name = name
@@ -15,23 +11,20 @@ class Product:
         """Возвращает имя товара, цену и количество в строковом формате"""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт.\n"
 
-
     @property
     def price(self):
         """Возвращение цены"""
         return self.__price
 
-
     @classmethod
     def new_product(cls, product_data):
         """Добавление нового товара с условием дублирования"""
         return cls(
-            name = product_data["name"],
-            description = product_data["description"],
-            price = product_data["price"],
-            quantity = product_data["quantity"]
+            name=product_data["name"],
+            description=product_data["description"],
+            price=product_data["price"],
+            quantity=product_data["quantity"]
         )
-
 
     @price.setter
     def price(self, value):
@@ -40,7 +33,6 @@ class Product:
             print("""Цена не должна быть нулевая или отрицательная""")
             return
         self.__price = value
-
 
     def __add__(self, other):
         """

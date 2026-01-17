@@ -3,9 +3,6 @@ from src.products import Product
 
 class Category:
     """Класс категорий."""
-    name: str
-    description: str
-    products: list
     category_count = 0
     product_count = 0
 
@@ -14,7 +11,6 @@ class Category:
         self.description = description
         self.__products = []
         Category.category_count += 1
-
 
         if products:
             for product in products:

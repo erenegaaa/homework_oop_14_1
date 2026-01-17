@@ -1,12 +1,10 @@
-import pytest
-
 from src.category import Category
 from src.products import Product
 
 
 def test_category_attributes(sample_category):
-        products_str = sample_category.products
-        assert "Vivo, 13000 руб. Остаток: 5 шт.\n" in products_str
+    products_str = sample_category.products
+    assert "Vivo, 13000 руб. Остаток: 5 шт.\n" in products_str
 
 
 def test_category_types(sample_category):
@@ -54,7 +52,6 @@ def test_add_product_to_category():
 
     assert products_str.count("\n") == 1
     assert "iPhone, 100000 руб. Остаток: 5 шт." in products_str
-
 
 
 def test_add_duplicate_product():

@@ -1,5 +1,6 @@
 from src.products import Product
 
+
 def test_product_attibutes(sample_product):
     assert sample_product.name == "Nokia 3310"
     assert sample_product.description == "Агрегат для всего"
@@ -22,6 +23,7 @@ def test_price_is_not_zero_or_negative(capsys):
 
     assert "Цена не должна быть нулевая или отрицательная" in captured.out
     assert product.price == 100
+
 
 def test_str_product(sample_product):
     assert str(sample_product) == "Nokia 3310, 850 руб. Остаток: 3 шт.\n"
