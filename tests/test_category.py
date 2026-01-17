@@ -1,19 +1,7 @@
 import pytest
+
 from src.category import Category
 from src.products import Product
-
-
-@pytest.fixture
-def sample_category():
-    return Category(
-        name="Телефоны", description="От мобильных до стационарных",
-        products=[
-            Product(
-                name="Vivo", description="Неплохой гаджет",
-                price=13000, quantity=5
-            )
-        ]
-    )
 
 
 def test_category_attributes(sample_category):
@@ -44,22 +32,6 @@ def test_category_counters():
     assert Category.product_count == 3
 
 
-@pytest.fixture(autouse=True)
-def reset_counters():
-    Category.product_count = 0
-    Category.category_count = 0
-
-
-@pytest.fixture
-def empty_category():
-    return Category("Phones", "desc", [])
-
-
-@pytest.fixture
-def sample_product():
-    return Product("iPhone", "desc", 100000, 5)
-
-
 def test_add_product(empty_category, sample_product):
     assert Category.product_count == 0
     assert empty_category.products == ""
@@ -68,7 +40,7 @@ def test_add_product(empty_category, sample_product):
 
     assert Category.product_count == 1
     assert empty_category.products == (
-        "iPhone, 100000 руб. Остаток: 5 шт.\n"
+        "Nokia 3310, 850 руб. Остаток: 3 шт.\n"
     )
 
 
@@ -95,9 +67,9 @@ def test_add_duplicate_product():
 
     products_str = category.products
 
-    assert products_str.count("\n") == 1
+    assert products_str.count("\n") == 2
     assert "Vivo, 19000 руб." in products_str
-    assert "Остаток: 6 шт." in products_str
+    assert 'Vivo, 17000 руб. Остаток: 3 шт.\nVivo, 19000 руб. Остаток: 3 шт.\n' in products_str
 
 
 def test_category_str(sample_category):

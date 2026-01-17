@@ -1,5 +1,4 @@
 from src.category import Category
-from src.products import Product
 from src.smartphone import Smartphone
 from src.lawngrass import LawnGrass
 

@@ -1,28 +1,4 @@
-import pytest
 from src.products import Product
-
-
-@pytest.fixture
-def sample_product():
-    """Фикстура для создания объекта продукта."""
-    return Product(
-        name="Nokia 3310",
-        description="Агрегат для всего",
-        price=850,
-        quantity=3
-    )
-
-
-@pytest.fixture
-def sample_product_2():
-    """Фикстура для создания объекта продукта."""
-    return Product(
-        name="iphone",
-        description="512/12",
-        price=399000,
-        quantity=3
-    )
-
 
 def test_product_attibutes(sample_product):
     assert sample_product.name == "Nokia 3310"
