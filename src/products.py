@@ -47,4 +47,6 @@ class Product:
         Метод позволяющий сложить цену и количество продуктов
         Вид формулы: a * b + a * b
         """
-        return self.price * self.quantity + other.price * other.quantity
+        if type(other) is Product:
+            return self.price * self.quantity + other.price * other.quantity
+        raise TypeError("Невозможно сложить продукты разных категорий")
