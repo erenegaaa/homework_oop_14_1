@@ -100,3 +100,13 @@ def lawnglass_2():
                      "14 дней",
                      "Зеленый"
                      )
+
+
+@pytest.fixture
+def product():
+    return Product("Phone", "Smartphone", 1000, 5)
+
+
+@pytest.fixture
+def second_product():
+    return Product("Laptop", "Gaming laptop", 2000, 3)

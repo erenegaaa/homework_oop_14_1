@@ -31,3 +31,49 @@ def test_str_product(sample_product):
 
 def test_add_products(sample_product, sample_product_2):
     assert sample_product + sample_product_2 == 1199550
+
+
+def test_product_init(product):
+    assert product.name == "Phone"
+    assert product.description == "Smartphone"
+    assert product.price == 1000
+    assert product.quantity == 5
+
+
+def test_product_str(product):
+    assert str(product) == "Phone, 1000 руб. Остаток: 5 шт.\n"
+
+
+def test_price_getter(product):
+    assert product.price == 1000
+
+
+def test_price_setter(product):
+    product.price = 1500
+    assert product.price == 1500
+
+
+def test_price_setter_negative(product):
+    product.price = -500
+    assert product.price == 1000
+
+
+def test_new_product(product):
+    data = {
+        "name": "Tablet",
+        "description": "Android tablet",
+        "price": 500,
+        "quantity": 10
+    }
+
+    product = Product.new_product(data)
+
+    assert isinstance(product, Product)
+    assert product.name == "Tablet"
+    assert product.price == 500
+    assert product.quantity == 10
+
+
+def test_add_product(product, second_product):
+    result = product + second_product
+    assert result == 1000 * 5 + 2000 * 3

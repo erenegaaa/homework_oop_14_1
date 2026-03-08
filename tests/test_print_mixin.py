@@ -30,3 +30,5 @@ def test_print_mixin(capsys):
               )
     message = capsys.readouterr()
     assert message.out.strip() == "LawnGrass, Газонная трава, 500.0 руб. Остаток: 20 шт."
+
+
