@@ -1,4 +1,6 @@
-class Product:
+from src.base_class import BaseClass
+
+class Product(BaseClass):
     """Класс продуктов."""
 
     def __init__(self, name, description, price, quantity):
