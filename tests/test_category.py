@@ -3,26 +3,9 @@ from src.category import Category
 from src.products import Product
 
 
-@pytest.fixture
-def sample_category():
-    return Category(
-        name="Телефоны", description="От мобильных до стационарных",
-        products=[
-            Product(
-                name="Vivo - blue Sky, 64Gb", description="Неплохой гаджет",
-                price=13000, quantity=5
-            )
-        ]
-    )
-
-
 def test_category_attributes(sample_category):
-    assert sample_category.name == "Телефоны"
-    assert sample_category.description == "От мобильных до стационарных"
-    assert sample_category.products[0].name == "Vivo - blue Sky, 64Gb"
-    assert sample_category.products[0].description == "Неплохой гаджет"
-    assert sample_category.products[0].price == 13000
-    assert sample_category.products[0].quantity == 5
+    products_str = sample_category.products
+    assert "Vivo, 13000 руб. Остаток: 5 шт.\n" in products_str
 
 
 def test_category_types(sample_category):
@@ -48,27 +31,44 @@ def test_category_counters():
     assert Category.product_count == 3
 
 
-@pytest.fixture(autouse=True)
-def reset_counters():
-    Category.product_count = 0
-    Category.category_count = 0
-
-
-@pytest.fixture
-def empty_category():
-    return Category("Phones", "desc", [])
-
-
-@pytest.fixture
-def sample_product():
-    return Product("iPhone", "desc", 100000, 5)
-
-
 def test_add_product(empty_category, sample_product):
-    assert empty_category.product_count == 0
-    assert len(empty_category.products) == 0
+    assert Category.product_count == 0
+    assert empty_category.products == ""
 
     empty_category.add_product(sample_product)
 
-    assert empty_category.product_count == 1
-    assert empty_category.products[0] == sample_product
+    assert Category.product_count == 1
+    assert empty_category.products == (
+        "Nokia 3310, 850 руб. Остаток: 3 шт.\n"
+    )
+
+
+def test_add_product_to_category():
+    category = Category("Phones", "desc")
+    product = Product("iPhone", "desc", 100000, 5)
+
+    category.add_product(product)
+
+    products_str = category.products
+
+    assert products_str.count("\n") == 1
+    assert "iPhone, 100000 руб. Остаток: 5 шт." in products_str
+
+
+def test_add_duplicate_product():
+    category = Category("Phones", "desc")
+    product1 = Product("Vivo", "128/6", 17000, 3)
+    product2 = Product("Vivo", "128/6", 19000, 3)
+
+    category.add_product(product1)
+    category.add_product(product2)
+
+    products_str = category.products
+
+    assert products_str.count("\n") == 2
+    assert "Vivo, 19000 руб." in products_str
+    assert 'Vivo, 17000 руб. Остаток: 3 шт.\nVivo, 19000 руб. Остаток: 3 шт.\n' in products_str
+
+
+def test_category_str(sample_category):
+    assert str(sample_category) == "Телефоны, количество продуктов: 5 шт."
